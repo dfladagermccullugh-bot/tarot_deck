@@ -21,8 +21,13 @@ struct Deck: Identifiable, Equatable {
     func thumbnail(_ card: Int) -> UIImage? { entry(card).flatMap { url($0.image) }.flatMap(ImageCache.thumbnail) }
 
     func name(_ card: Int) -> String { entry(card)?.name ?? StandardCards.all[card].name }
-    func keywords(_ card: Int) -> [String] { entry(card)?.keywords ?? [] }
-    func meaning(_ card: Int) -> String? { entry(card)?.meaning }
+    // A deck's own guidebook text wins; otherwise the standard meanings shipped with the app.
+    func keywords(_ card: Int) -> [String] {
+        entry(card)?.keywords ?? standardNotes[StandardCards.all[card].id]?.keywords ?? []
+    }
+    func meaning(_ card: Int) -> String? {
+        entry(card)?.meaning ?? standardNotes[StandardCards.all[card].id]?.meaning
+    }
 
     private func entry(_ card: Int) -> DeckManifest.Card? {
         let id = StandardCards.all[card].id
@@ -33,6 +38,19 @@ struct Deck: Identifiable, Equatable {
         folder?.appendingPathComponent(path)
     }
 }
+
+private struct CardNote: Decodable {
+    let keywords: [String]
+    let meaning: String
+}
+
+/// meanings.json: standard card id -> keywords and meaning.
+private let standardNotes: [String: CardNote] = {
+    guard let url = Bundle.main.url(forResource: "meanings", withExtension: "json"),
+        let data = try? Data(contentsOf: url)
+    else { return [:] }
+    return (try? JSONDecoder().decode([String: CardNote].self, from: data)) ?? [:]
+}()
 
 extension Deck {
     init(folder: URL) throws {

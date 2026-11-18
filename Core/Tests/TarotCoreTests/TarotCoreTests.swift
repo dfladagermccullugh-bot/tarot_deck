@@ -99,6 +99,20 @@ final class TarotCoreTests: XCTestCase {
         XCTAssertEqual(StandardCards.all[77].id, "pentacles-king")
     }
 
+    func testBundledMeaningsCoverExactlyTheStandardCards() throws {
+        struct Note: Decodable {
+            let keywords: [String]
+            let meaning: String
+        }
+        let root = URL(fileURLWithPath: #filePath)
+            .deletingLastPathComponent().deletingLastPathComponent()
+            .deletingLastPathComponent().deletingLastPathComponent()
+        let data = try Data(contentsOf: root.appendingPathComponent("App/Resources/meanings.json"))
+        let notes = try JSONDecoder().decode([String: Note].self, from: data)
+        XCTAssertEqual(Set(notes.keys), StandardCards.ids)
+        XCTAssertTrue(notes.values.allSatisfy { !$0.keywords.isEmpty && !$0.meaning.isEmpty })
+    }
+
     func testValidDeckPasses() {
         XCTAssertNil(error(manifest()))
     }

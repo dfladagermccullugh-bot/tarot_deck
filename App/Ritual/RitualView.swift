@@ -13,7 +13,7 @@ struct RitualView: View {
     var body: some View {
         ZStack {
             Color.black.ignoresSafeArea()
-            deck
+            cardStack
             if case .cutting = session.phase {
                 edgeStrip
                     .frame(maxWidth: .infinity, alignment: .trailing)
@@ -54,7 +54,7 @@ struct RitualView: View {
 
     // MARK: Deck
 
-    private var deck: some View {
+    private var cardStack: some View {
         ZStack {
             // The rest of the deck showing beneath the top card.
             ForEach([4, 3, 2, 1], id: \.self) { layer in
