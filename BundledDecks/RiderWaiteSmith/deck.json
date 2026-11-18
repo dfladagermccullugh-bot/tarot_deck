@@ -1,0 +1,320 @@
+{
+ "id": "rider-waite-smith",
+ "name": "Rider-Waite-Smith (1909)",
+ "author": "Pamela Colman Smith",
+ "back": "back.jpg",
+ "cards": [
+  {
+   "id": "major-00",
+   "image": "major-00.jpg"
+  },
+  {
+   "id": "major-01",
+   "image": "major-01.jpg"
+  },
+  {
+   "id": "major-02",
+   "image": "major-02.jpg"
+  },
+  {
+   "id": "major-03",
+   "image": "major-03.jpg"
+  },
+  {
+   "id": "major-04",
+   "image": "major-04.jpg"
+  },
+  {
+   "id": "major-05",
+   "image": "major-05.jpg"
+  },
+  {
+   "id": "major-06",
+   "image": "major-06.jpg"
+  },
+  {
+   "id": "major-07",
+   "image": "major-07.jpg"
+  },
+  {
+   "id": "major-08",
+   "image": "major-08.jpg"
+  },
+  {
+   "id": "major-09",
+   "image": "major-09.jpg"
+  },
+  {
+   "id": "major-10",
+   "image": "major-10.jpg"
+  },
+  {
+   "id": "major-11",
+   "image": "major-11.jpg"
+  },
+  {
+   "id": "major-12",
+   "image": "major-12.jpg"
+  },
+  {
+   "id": "major-13",
+   "image": "major-13.jpg"
+  },
+  {
+   "id": "major-14",
+   "image": "major-14.jpg"
+  },
+  {
+   "id": "major-15",
+   "image": "major-15.jpg"
+  },
+  {
+   "id": "major-16",
+   "image": "major-16.jpg"
+  },
+  {
+   "id": "major-17",
+   "image": "major-17.jpg"
+  },
+  {
+   "id": "major-18",
+   "image": "major-18.jpg"
+  },
+  {
+   "id": "major-19",
+   "image": "major-19.jpg"
+  },
+  {
+   "id": "major-20",
+   "image": "major-20.jpg"
+  },
+  {
+   "id": "major-21",
+   "image": "major-21.jpg"
+  },
+  {
+   "id": "wands-ace",
+   "image": "wands-ace.jpg"
+  },
+  {
+   "id": "wands-02",
+   "image": "wands-02.jpg"
+  },
+  {
+   "id": "wands-03",
+   "image": "wands-03.jpg"
+  },
+  {
+   "id": "wands-04",
+   "image": "wands-04.jpg"
+  },
+  {
+   "id": "wands-05",
+   "image": "wands-05.jpg"
+  },
+  {
+   "id": "wands-06",
+   "image": "wands-06.jpg"
+  },
+  {
+   "id": "wands-07",
+   "image": "wands-07.jpg"
+  },
+  {
+   "id": "wands-08",
+   "image": "wands-08.jpg"
+  },
+  {
+   "id": "wands-09",
+   "image": "wands-09.jpg"
+  },
+  {
+   "id": "wands-10",
+   "image": "wands-10.jpg"
+  },
+  {
+   "id": "wands-page",
+   "image": "wands-page.jpg"
+  },
+  {
+   "id": "wands-knight",
+   "image": "wands-knight.jpg"
+  },
+  {
+   "id": "wands-queen",
+   "image": "wands-queen.jpg"
+  },
+  {
+   "id": "wands-king",
+   "image": "wands-king.jpg"
+  },
+  {
+   "id": "cups-ace",
+   "image": "cups-ace.jpg"
+  },
+  {
+   "id": "cups-02",
+   "image": "cups-02.jpg"
+  },
+  {
+   "id": "cups-03",
+   "image": "cups-03.jpg"
+  },
+  {
+   "id": "cups-04",
+   "image": "cups-04.jpg"
+  },
+  {
+   "id": "cups-05",
+   "image": "cups-05.jpg"
+  },
+  {
+   "id": "cups-06",
+   "image": "cups-06.jpg"
+  },
+  {
+   "id": "cups-07",
+   "image": "cups-07.jpg"
+  },
+  {
+   "id": "cups-08",
+   "image": "cups-08.jpg"
+  },
+  {
+   "id": "cups-09",
+   "image": "cups-09.jpg"
+  },
+  {
+   "id": "cups-10",
+   "image": "cups-10.jpg"
+  },
+  {
+   "id": "cups-page",
+   "image": "cups-page.jpg"
+  },
+  {
+   "id": "cups-knight",
+   "image": "cups-knight.jpg"
+  },
+  {
+   "id": "cups-queen",
+   "image": "cups-queen.jpg"
+  },
+  {
+   "id": "cups-king",
+   "image": "cups-king.jpg"
+  },
+  {
+   "id": "swords-ace",
+   "image": "swords-ace.jpg"
+  },
+  {
+   "id": "swords-02",
+   "image": "swords-02.jpg"
+  },
+  {
+   "id": "swords-03",
+   "image": "swords-03.jpg"
+  },
+  {
+   "id": "swords-04",
+   "image": "swords-04.jpg"
+  },
+  {
+   "id": "swords-05",
+   "image": "swords-05.jpg"
+  },
+  {
+   "id": "swords-06",
+   "image": "swords-06.jpg"
+  },
+  {
+   "id": "swords-07",
+   "image": "swords-07.jpg"
+  },
+  {
+   "id": "swords-08",
+   "image": "swords-08.jpg"
+  },
+  {
+   "id": "swords-09",
+   "image": "swords-09.jpg"
+  },
+  {
+   "id": "swords-10",
+   "image": "swords-10.jpg"
+  },
+  {
+   "id": "swords-page",
+   "image": "swords-page.jpg"
+  },
+  {
+   "id": "swords-knight",
+   "image": "swords-knight.jpg"
+  },
+  {
+   "id": "swords-queen",
+   "image": "swords-queen.jpg"
+  },
+  {
+   "id": "swords-king",
+   "image": "swords-king.jpg"
+  },
+  {
+   "id": "pentacles-ace",
+   "image": "pentacles-ace.jpg"
+  },
+  {
+   "id": "pentacles-02",
+   "image": "pentacles-02.jpg"
+  },
+  {
+   "id": "pentacles-03",
+   "image": "pentacles-03.jpg"
+  },
+  {
+   "id": "pentacles-04",
+   "image": "pentacles-04.jpg"
+  },
+  {
+   "id": "pentacles-05",
+   "image": "pentacles-05.jpg"
+  },
+  {
+   "id": "pentacles-06",
+   "image": "pentacles-06.jpg"
+  },
+  {
+   "id": "pentacles-07",
+   "image": "pentacles-07.jpg"
+  },
+  {
+   "id": "pentacles-08",
+   "image": "pentacles-08.jpg"
+  },
+  {
+   "id": "pentacles-09",
+   "image": "pentacles-09.jpg"
+  },
+  {
+   "id": "pentacles-10",
+   "image": "pentacles-10.jpg"
+  },
+  {
+   "id": "pentacles-page",
+   "image": "pentacles-page.jpg"
+  },
+  {
+   "id": "pentacles-knight",
+   "image": "pentacles-knight.jpg"
+  },
+  {
+   "id": "pentacles-queen",
+   "image": "pentacles-queen.jpg"
+  },
+  {
+   "id": "pentacles-king",
+   "image": "pentacles-king.jpg"
+  }
+ ]
+}

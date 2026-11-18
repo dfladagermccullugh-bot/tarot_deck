@@ -43,7 +43,7 @@ final class DeckStore {
     }
 
     func delete(_ deck: Deck) {
-        guard let folder = deck.folder else { return }
+        guard !deck.isBuiltIn, let folder = deck.folder else { return }
         try? files.removeItem(at: folder)
         reload()
     }

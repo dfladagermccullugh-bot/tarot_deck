@@ -13,7 +13,12 @@ targets:
   Tarot:
     type: application
     platform: iOS
-    sources: [App]
+    sources:
+      - path: App
+      # Copied into the app as a folder so the deck keeps its deck.json + images layout.
+      - path: BundledDecks/RiderWaiteSmith
+        type: folder
+        buildPhase: resources
     dependencies:
       - package: TarotCore
       - package: ZIPFoundation

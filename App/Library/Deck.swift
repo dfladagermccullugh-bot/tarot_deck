@@ -4,17 +4,25 @@ import TarotCore
 /// A deck on the shelf: its manifest plus the folder holding its images.
 struct Deck: Identifiable, Equatable {
     let manifest: DeckManifest
-    /// nil for the built-in plain deck, which is drawn instead of loaded.
+    /// nil for the plain deck, which is drawn instead of loaded.
     let folder: URL?
 
     var id: String { manifest.id }
-    var isBuiltIn: Bool { folder == nil }
+    var isBuiltIn: Bool { id == Deck.builtIn.id }
 
-    static let builtIn = Deck(
-        manifest: DeckManifest(
-            id: "plain", name: "Plain Deck", back: "",
-            cards: StandardCards.all.map { DeckManifest.Card(id: $0.id, image: "") }),
-        folder: nil)
+    /// The Rider-Waite-Smith deck shipped inside the app, or a plain drawn deck if its folder is missing.
+    static let builtIn: Deck = {
+        if let folder = Bundle.main.url(forResource: "RiderWaiteSmith", withExtension: nil),
+            let deck = try? Deck(folder: folder)
+        {
+            return deck
+        }
+        return Deck(
+            manifest: DeckManifest(
+                id: "plain", name: "Plain Deck", back: "",
+                cards: StandardCards.all.map { DeckManifest.Card(id: $0.id, image: "") }),
+            folder: nil)
+    }()
 
     var back: UIImage? { url(manifest.back).flatMap(ImageCache.full) }
     func face(_ card: Int) -> UIImage? { entry(card).flatMap { url($0.image) }.flatMap(ImageCache.full) }

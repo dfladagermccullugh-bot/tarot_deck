@@ -113,6 +113,16 @@ final class TarotCoreTests: XCTestCase {
         XCTAssertTrue(notes.values.allSatisfy { !$0.keywords.isEmpty && !$0.meaning.isEmpty })
     }
 
+    func testBundledDeckIsValid() throws {
+        let deck = URL(fileURLWithPath: #filePath)
+            .deletingLastPathComponent().deletingLastPathComponent()
+            .deletingLastPathComponent().deletingLastPathComponent()
+            .appendingPathComponent("BundledDecks/RiderWaiteSmith")
+        let data = try Data(contentsOf: deck.appendingPathComponent("deck.json"))
+        let manifest = try JSONDecoder().decode(DeckManifest.self, from: data)
+        try manifest.validate { FileManager.default.fileExists(atPath: deck.appendingPathComponent($0).path) }
+    }
+
     func testValidDeckPasses() {
         XCTAssertNil(error(manifest()))
     }
