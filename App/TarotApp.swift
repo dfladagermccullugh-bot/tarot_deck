@@ -4,7 +4,7 @@ import SwiftUI
 struct TarotApp: App {
     var body: some Scene {
         WindowGroup {
-            RitualView()
+            LibraryView()
                 .preferredColorScheme(.dark)
         }
     }

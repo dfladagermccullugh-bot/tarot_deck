@@ -6,6 +6,9 @@ options:
 packages:
   TarotCore:
     path: Core
+  ZIPFoundation:
+    url: https://github.com/weichsel/ZIPFoundation
+    from: 0.9.19
 targets:
   Tarot:
     type: application
@@ -13,6 +16,7 @@ targets:
     sources: [App]
     dependencies:
       - package: TarotCore
+      - package: ZIPFoundation
     scheme:
       gatherCoverageData: false
     settings:

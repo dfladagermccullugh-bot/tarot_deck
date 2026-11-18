@@ -2,12 +2,13 @@ import SwiftUI
 import TarotCore
 
 struct RitualView: View {
+    let deck: Deck
+
+    @Environment(\.dismiss) private var dismiss
     @State private var session = RitualSession()
     @State private var showTuning = false
     @State private var dragTurn = 0.0
     @State private var feltIndex: Int?
-
-    private var topCardName: String { StandardCards.all[session.order.top].name }
 
     var body: some View {
         ZStack {
@@ -26,6 +27,16 @@ struct RitualView: View {
                 Image(systemName: "slider.horizontal.3").padding(16)
             }
             .tint(.white.opacity(0.4))
+            .accessibilityLabel("Tuning")
+        }
+        .overlay(alignment: .topTrailing) {
+            Button {
+                dismiss()
+            } label: {
+                Image(systemName: "xmark").padding(16)
+            }
+            .tint(.white.opacity(0.4))
+            .accessibilityLabel("Back to library")
         }
         .overlay(alignment: .bottom) { footer }
         .sheet(isPresented: $showTuning) { TuningView(session: session) }
@@ -52,9 +63,9 @@ struct RitualView: View {
                     .offset(x: CGFloat(layer) * 2, y: CGFloat(layer) * 2)
             }
             FlipCard(angle: session.phase == .revealed ? 180 : dragTurn) {
-                CardBack()
+                CardBack(image: deck.back)
             } back: {
-                CardFace(name: topCardName)
+                CardFace(image: deck.face(session.order.top), name: deck.name(session.order.top))
             }
             // Each chop lifts the top packet and drops it back.
             .phaseAnimator([false, true], trigger: session.chopCount) { card, lifted in
@@ -131,11 +142,15 @@ struct RitualView: View {
             caption("Turn the card.")
         case .revealed:
             VStack(spacing: 12) {
-                Text(topCardName).font(.title2.weight(.semibold))
-                Button("Shuffle again") {
-                    withAnimation(.spring(duration: 0.5)) { session.reset() }
+                CardText(deck: deck, card: session.order.top)
+                HStack(spacing: 16) {
+                    Button("Library") { dismiss() }
+                        .buttonStyle(.bordered)
+                    Button("Shuffle again") {
+                        withAnimation(.spring(duration: 0.5)) { session.reset() }
+                    }
+                    .buttonStyle(.borderedProminent)
                 }
-                .buttonStyle(.borderedProminent)
             }
             .padding()
             .frame(maxWidth: .infinity)
@@ -180,34 +195,70 @@ struct FlipCard<Front: View, Back: View>: View, Animatable {
     }
 }
 
-// Placeholder art until real decks arrive with the library.
+/// A deck's card back, or a drawn one when the deck has no art.
 struct CardBack: View {
-    private let gold = Color(red: 0.85, green: 0.7, blue: 0.35)
+    var image: UIImage?
+    var corner: CGFloat = 20
 
     var body: some View {
-        RoundedRectangle(cornerRadius: 20)
-            .fill(
-                LinearGradient(
-                    colors: [Color(red: 0.16, green: 0.1, blue: 0.35), Color(red: 0.05, green: 0.03, blue: 0.15)],
-                    startPoint: .top, endPoint: .bottom)
-            )
-            .overlay(RoundedRectangle(cornerRadius: 12).strokeBorder(gold, lineWidth: 2).padding(10))
-            .overlay(Image(systemName: "moon.stars.fill").font(.system(size: 64)).foregroundStyle(gold))
+        let gold = Color(red: 0.85, green: 0.7, blue: 0.35)
+        if let image {
+            CardImage(image: image, corner: corner)
+        } else {
+            RoundedRectangle(cornerRadius: corner)
+                .fill(
+                    LinearGradient(
+                        colors: [Color(red: 0.16, green: 0.1, blue: 0.35), Color(red: 0.05, green: 0.03, blue: 0.15)],
+                        startPoint: .top, endPoint: .bottom)
+                )
+                .overlay(
+                    RoundedRectangle(cornerRadius: corner * 0.6)
+                        .strokeBorder(gold, lineWidth: corner / 10)
+                        .padding(corner / 2)
+                )
+                .overlay(
+                    Image(systemName: "moon.stars.fill")
+                        .resizable()
+                        .scaledToFit()
+                        .foregroundStyle(gold)
+                        .padding(corner * 2.5)
+                )
+        }
     }
 }
 
+/// A card's face, or its name on plain stock when the deck has no art.
 struct CardFace: View {
+    var image: UIImage?
     let name: String
+    var corner: CGFloat = 20
 
     var body: some View {
-        RoundedRectangle(cornerRadius: 20)
-            .fill(Color(red: 0.96, green: 0.93, blue: 0.85))
-            .overlay(
-                Text(name)
-                    .font(.system(.title, design: .serif))
-                    .foregroundStyle(.black)
-                    .multilineTextAlignment(.center)
-                    .padding()
-            )
+        if let image {
+            CardImage(image: image, corner: corner)
+        } else {
+            RoundedRectangle(cornerRadius: corner)
+                .fill(Color(red: 0.96, green: 0.93, blue: 0.85))
+                .overlay(
+                    Text(name)
+                        .font(.system(.title, design: .serif))
+                        .minimumScaleFactor(0.3)
+                        .foregroundStyle(.black)
+                        .multilineTextAlignment(.center)
+                        .padding(corner / 2)
+                )
+        }
+    }
+}
+
+/// Fills whatever frame the card is given, cropping instead of stretching.
+private struct CardImage: View {
+    let image: UIImage
+    let corner: CGFloat
+
+    var body: some View {
+        Color.clear
+            .overlay(Image(uiImage: image).resizable().scaledToFill())
+            .clipShape(RoundedRectangle(cornerRadius: corner))
     }
 }
